@@ -11,23 +11,23 @@ return new class extends Migration
      */
     public function up(): void
 {
-    Schema::create('jobs', function (Blueprint $table) {
+    Schema::create('employers', function (Blueprint $table) {
         $table->id();
-        $table->foreignId('employer_id')->constrained()->onDelete('cascade');
-        $table->string('title');
-        $table->string('location')->nullable();
-        $table->string('employment_type')->nullable(); // full-time, part-time, etc.
-        $table->text('description');
-        $table->text('requirements')->nullable();
-        $table->string('language_requirement')->nullable(); // z.B. B2 Deutsch
-        $table->boolean('is_active')->default(true);
+        $table->foreignId('user_id')->constrained()->onDelete('cascade');
+        $table->string('company_name');
+        $table->string('contact_person')->nullable();
+        $table->string('country')->nullable();
+        $table->string('city')->nullable();
+        $table->string('industry')->nullable();
+        $table->string('website')->nullable();
+        $table->text('company_description')->nullable();
         $table->timestamps();
     });
 }
 
 public function down(): void
 {
-    Schema::dropIfExists('jobs');
+    Schema::dropIfExists('employers');
 }
 
 };
