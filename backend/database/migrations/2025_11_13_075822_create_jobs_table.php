@@ -10,18 +10,24 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {
-        Schema::create('jobs', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+{
+    Schema::create('jobs', function (Blueprint $table) {
+        $table->id();
+        $table->foreignId('employer_id')->constrained()->onDelete('cascade');
+        $table->string('title');
+        $table->string('location')->nullable();
+        $table->string('employment_type')->nullable(); // full-time, part-time, etc.
+        $table->text('description');
+        $table->text('requirements')->nullable();
+        $table->string('language_requirement')->nullable(); // z.B. B2 Deutsch
+        $table->boolean('is_active')->default(true);
+        $table->timestamps();
+    });
+}
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('jobs');
-    }
+public function down(): void
+{
+    Schema::dropIfExists('jobs');
+}
+
 };
