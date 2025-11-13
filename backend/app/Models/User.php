@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,11 +15,21 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role',
+        'role', // candidate, employer, admin
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
     ];
+
+    public function candidateProfile()
+    {
+        return $this->hasOne(CandidateProfile::class);
+    }
+
+    public function employer()
+    {
+        return $this->hasOne(Employer::class);
+    }
 }
